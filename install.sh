@@ -31,6 +31,14 @@ echo "Setting fp=$FP"
 docker exec "$CONTAINER" sh -c \
 "sed -i \"s/settings\\['fp'\\] = '.*'/settings['fp'] = '$FP'/g\" $CONFIG_FILE"
 
-docker restart "$CONTAINER"
+echo ""
+echo "Restarting container marzban-marzban-1..."
+docker restart marzban-marzban-1
 
-echo "Done. Current fp: $FP"
+echo ""
+echo "Checking current fingerprint value:"
+docker exec marzban-marzban-1 sh -c \
+"grep -n \"settings\\['fp'\\]\" $CONFIG_FILE || true"
+
+echo ""
+echo "Done. Current fp should be: $FP"
