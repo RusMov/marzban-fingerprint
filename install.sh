@@ -42,8 +42,3 @@ docker exec marzban-marzban-1 sh -c \
 
 echo ""
 echo "Done. Current fp should be: $FP"
-
-sleep 2
-
-docker exec marzban-marzban-1 sh -c \
-"sed -i \"s/settings\\['fp'\\] = '.*'/settings['fp'] = '$FP'/g\" $CONFIG_FILE"
