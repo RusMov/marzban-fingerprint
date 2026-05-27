@@ -1,4 +1,3 @@
-cat > install.sh << 'EOF'
 #!/usr/bin/env bash
 
 set -e
@@ -53,21 +52,28 @@ if [ -z "$FP" ]; then
 fi
 
 echo
+
 echo "Устанавливаем fp=$FP"
+
 
 docker exec "$CONTAINER" sh -c "sed -i \"s/settings\\['fp'\\] = '.*'/settings['fp'] = '$FP'/g\" $CONFIG_FILE"
 
+
 echo
+
 echo "Проверка:"
 docker exec "$CONTAINER" sh -c "grep -n \"settings\\['fp'\\]\" $CONFIG_FILE"
 
+
 echo
+
 echo "Перезапуск контейнера..."
 docker restart "$CONTAINER" >/dev/null
 
+
 echo
+
 echo "================================="
 echo " Готово"
 echo "================================="
 echo "Текущий fingerprint: $FP"
-EOF
